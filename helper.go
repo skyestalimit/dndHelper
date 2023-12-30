@@ -50,9 +50,9 @@ func parseRollArg(rollArg string) (roller.DiceRoll, error) {
 	}
 	// Parse a single roll argument and returns it as a DiceRoll
 	rollArg, modifier := evaluateModifier(rollArg)
-	diceSize, diceAmmount := evaluateDiceSizeAndAmmount(rollArg)
+	diceAmmount, diceSize := evaluateDiceSizeAndAmmount(rollArg)
 
-	return roller.DiceRoll {diceSize, diceAmmount, modifier}, nil
+	return roller.DiceRoll {diceAmmount, diceSize, modifier}, nil
 }
 
 func evaluateModifier(rollArg string) (string, int) {
@@ -83,17 +83,18 @@ func parseModifier(rollArg string, symbol string) (string, int){
 
 func evaluateDiceSizeAndAmmount(rollArg string) (int, int){
 	argSlices := strings.Split(rollArg, "d")
-	dice, diceErr := strconv.Atoi(argSlices[0])
+	ammount := parseDiceSlice(argSlices[0])
+	size := parseDiceSlice(argSlices[1])
+	return ammount, size
+}
+
+func parseDiceSlice(diceSlice string) int {
+	dice, diceErr := strconv.Atoi(diceSlice)
 	if diceErr != nil {
-		fmt.Println(fmt.Sprintf("Error converting dice value of %s: %s", argSlices, diceErr.Error()))
+		fmt.Println(fmt.Sprintf("Error converting dice value of %s: %s", diceSlice, diceErr.Error()))
 		dice = 0
 	}
-	ammount, ammountErr := strconv.Atoi(argSlices[1])
-	if ammountErr != nil {
-		fmt.Println(fmt.Sprintf("Error converting ammount value of %s: %s", argSlices, ammountErr.Error()))
-		ammount = 0
-	}
-	return dice, ammount
+	return dice
 }
 
 func printUsage() {
