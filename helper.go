@@ -46,6 +46,7 @@ func parseRollArgs(rollArgs []string) []roller.DiceRoll {
 
 func parseRollArg(rollArg string) (roller.DiceRoll, error) {
 	// Validate arg format
+	rollArg = strings.ToLower(rollArg)
 	regExp := regexp.MustCompile("^[[:digit:]]+d[[:digit:]]+([+|-][[:digit:]])?$")
 	if !regExp.MatchString(rollArg) {
 		return roller.DiceRoll{0, 0, 0}, errors.New(fmt.Sprintf("Invalid roll arg: %s", rollArg))
@@ -53,7 +54,7 @@ func parseRollArg(rollArg string) (roller.DiceRoll, error) {
 	// Parse a single roll argument and returns it as a DiceRoll
 	rollArg, modifier := evaluateModifier(rollArg)
 	
-	argSlices := strings.Split(strings.ToLower(rollArg), "d")
+	argSlices := strings.Split(rollArg, "d")
 	dice, diceErr := strconv.Atoi(argSlices[0])
 	if diceErr != nil {
 		fmt.Println(fmt.Sprintf("Error converting dice value of %s: %s", argSlices, diceErr.Error()))
