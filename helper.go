@@ -23,7 +23,6 @@ func main() {
 	}
 	// capture a dice roll input and roll it
 	rollInput := os.Args[1:len(os.Args)]
-	fmt.Println("rollInput: ", rollInput)
 	rollResult := roller.PerformRolls(parseRollArgs(rollInput))
 	fmt.Printf("Rolls result: %v \n", rollResult)
 }
@@ -37,7 +36,6 @@ func parseRollArgs(rollArgs []string) []roller.DiceRoll {
 		if err != nil {
 			fmt.Println(err)
 		} else {
-			fmt.Println("Appending dice roll: ", diceRoll)
 			diceRolls = append(diceRolls, diceRoll)
 		}
 	}
@@ -72,11 +70,9 @@ func evaluateModifier(rollArg string) (string, int) {
 	mod := 0
 	if strings.ContainsAny(rollArg, plus){
 		rollArg, mod = parseModifier(rollArg, plus)
-		fmt.Println("Contains +")
 
 	} else if strings.ContainsAny(rollArg, minus) {
 		rollArg, mod = parseModifier(rollArg, minus)
-		fmt.Println("Contains -")
 	}
 	return rollArg, mod
 }
