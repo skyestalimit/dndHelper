@@ -17,7 +17,16 @@ func main() {
 	// capture a dice roll input and roll it
 	rollInput := os.Args[1:len(os.Args)]
 	rollResult := roller.PerformRolls(roller.ParseRollArgs(rollInput))
-	fmt.Printf("Rolls result: %v \n", rollResult)
+	fmt.Println("Rolls sum:", getRollsSum(rollResult))
+}
+
+func getRollsSum(rollMap map[*roller.DiceRoll]*roller.DiceRollResult) (sum int) {
+	sum = 0
+	for i := range rollMap {
+		result := rollMap[i]
+		sum += result.Sum
+	}
+	return sum
 }
 
 func printUsage() {
