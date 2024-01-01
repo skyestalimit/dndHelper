@@ -1,6 +1,6 @@
 module github.com/dndhelper
 
-go 1.21.4
+go 1.21.5
 
 replace github.com/diceroller => ../diceroller
 
