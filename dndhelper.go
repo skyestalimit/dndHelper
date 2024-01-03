@@ -14,9 +14,25 @@ func main() {
 		printUsage()
 		return
 	}
-	// capture a dice roll input and roll it
+
+	// Captured args sent to be parsed into DiceRolls
 	rollInput := os.Args[1:len(os.Args)]
-	rollResult := roller.PerformRolls(roller.ParseRollArgs(rollInput))
+	argsMap := roller.ParseRollArgs(rollInput)
+
+	// Keep valid DiceRolls
+	diceRolls := make([]roller.DiceRoll, 0)
+	for diceRoll := range argsMap {
+		if argErr := argsMap[diceRoll]; argErr == nil {
+			diceRolls = append(diceRolls, *diceRoll)
+		} else {
+			fmt.Println(argErr)
+		}
+	}
+
+	// Roll!
+	rollResult := roller.PerformRolls(diceRolls)
+
+	// Print results
 	fmt.Println("Rolls sum:", getRollsSum(rollResult))
 }
 
