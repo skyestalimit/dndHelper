@@ -17,20 +17,22 @@ func main() {
 
 	// Captured args sent to be parsed into DiceRolls
 	rollInput := os.Args[1:len(os.Args)]
-	argsMap := roller.ParseRollArgs(rollInput)
+	diceRolls, argErrs := roller.ParseRollArgs(rollInput)
 
-	// Keep valid DiceRolls
-	diceRolls := make([]roller.DiceRoll, 0)
-	for diceRoll := range argsMap {
-		if argErr := argsMap[diceRoll]; argErr == nil {
-			diceRolls = append(diceRolls, *diceRoll)
-		} else {
-			fmt.Println(argErr)
-		}
+	// Print out parsing errors
+	for i := range argErrs {
+		fmt.Println(argErrs[i])
 	}
 
 	// Roll!
-	rollResult := roller.PerformRolls(diceRolls)
+	rollResult, diceErrs := roller.PerformRolls(diceRolls)
+	if len(diceErrs) > 0 {
+		strErrs := ""
+		for i := range diceErrs {
+			strErrs += diceErrs[i].Error()
+		}
+		fmt.Println("Unexpected dice roll errors:" + strErrs)
+	}
 
 	// Print results
 	fmt.Println("Rolls sum:", getRollsSum(rollResult))
