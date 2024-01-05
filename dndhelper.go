@@ -25,7 +25,7 @@ func main() {
 	}
 
 	// Roll!
-	rollResult, diceErrs := roller.PerformRolls(diceRolls)
+	rollsResult, diceErrs := roller.PerformRolls(diceRolls)
 	if len(diceErrs) > 0 {
 		strErrs := ""
 		for i := range diceErrs {
@@ -35,16 +35,10 @@ func main() {
 	}
 
 	// Print results
-	fmt.Println("Rolls sum:", getRollsSum(rollResult))
-}
-
-func getRollsSum(rollMap map[*roller.DiceRoll]*roller.DiceRollResult) (sum int) {
-	sum = 0
-	for i := range rollMap {
-		result := rollMap[i]
-		sum += result.Sum
+	for i := range rollsResult {
+		fmt.Println(rollsResult[i].String())
 	}
-	return sum
+	fmt.Println("Rolls sum:", roller.RollsSum(rollsResult))
 }
 
 func printUsage() {
