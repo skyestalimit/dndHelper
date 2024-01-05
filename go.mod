@@ -1,4 +1,4 @@
-module github.com/dndhelper
+module github.com/skyestalimit/dndhelper
 
 go 1.21.5
 
