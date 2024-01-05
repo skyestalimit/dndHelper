@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	roller "github.com/diceroller"
+	roller "github.com/skyestalimit/diceroller"
 )
 
 func main() {
