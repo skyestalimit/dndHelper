@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	roller "github.com/skyestalimit/diceroller"
+	diceroller "github.com/skyestalimit/diceroller"
 )
 
 func main() {
@@ -17,7 +17,7 @@ func main() {
 
 	// Captured args sent to be parsed into DiceRolls
 	rollInput := os.Args[1:len(os.Args)]
-	diceRolls, argErrs := roller.ParseRollArgs(rollInput)
+	diceRolls, argErrs := diceroller.ParseRollArgs(rollInput)
 
 	// Print out parsing errors
 	for i := range argErrs {
@@ -25,7 +25,7 @@ func main() {
 	}
 
 	// Roll!
-	rollsResult, diceErrs := roller.PerformRolls(diceRolls)
+	rollsResult, diceErrs := diceroller.PerformRolls(diceRolls)
 	if len(diceErrs) > 0 {
 		strErrs := ""
 		for i := range diceErrs {
@@ -38,7 +38,7 @@ func main() {
 	for i := range rollsResult {
 		fmt.Println(rollsResult[i].String())
 	}
-	fmt.Println("Rolls sum:", roller.RollsSum(rollsResult))
+	fmt.Println("Rolls sum:", diceroller.DiceRollResultsSum(rollsResult))
 }
 
 func printUsage() {
