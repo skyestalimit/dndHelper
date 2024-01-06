@@ -1,3 +1,20 @@
+/*
+Dndhelper takes command line arguments, sends them to a roll arg parser,
+and attempts to perform the rolls of the resulting DiceRolls.
+
+The results of each DiceRoll will be displayed along with the total sum
+of every DiceRoll.
+
+Usage:
+
+	dndhelper [rollArg] ... [rollArg]
+
+A rollArg must be in the format XdY(-|+Z). You can send as many rollArg as you want.
+
+Examples of valid roll args:
+
+	1d6, 4d4, 1d10+1, 1D8-1
+*/
 package main
 
 import (
@@ -16,8 +33,8 @@ func main() {
 	}
 
 	// Captured args sent to be parsed into DiceRolls
-	rollInput := os.Args[1:len(os.Args)]
-	diceRolls, argErrs := diceroller.ParseRollArgs(rollInput)
+	rollArgs := os.Args[1:len(os.Args)]
+	diceRolls, argErrs := diceroller.ParseRollArgs(rollArgs)
 
 	// Print out parsing errors
 	for i := range argErrs {
@@ -42,7 +59,7 @@ func main() {
 }
 
 func printUsage() {
-	fmt.Println("Usage:	dndhelper [DiceRoll] ... [DiceRoll]")
-	fmt.Println("	DiceRoll examples: 1d6, 4d4, 1d10+1, 1D8-1")
+	fmt.Println("Usage:	dndhelper [rollArg] ... [rollArg]")
+	fmt.Println("	Valid rollArg examples: 1d6, 4d4, 1d10+1, 1D8-1")
 	fmt.Println("	Returns the sum of all DiceRolls")
 }
