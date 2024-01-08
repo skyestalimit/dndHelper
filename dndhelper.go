@@ -44,11 +44,9 @@ func main() {
 	// Roll!
 	rollsResult, diceErrs := diceroller.PerformRolls(diceRolls)
 	if len(diceErrs) > 0 {
-		strErrs := ""
 		for i := range diceErrs {
-			strErrs += diceErrs[i].Error()
+			fmt.Println("Unexpected dice roll error:" + diceErrs[i].Error())
 		}
-		fmt.Println("Unexpected dice roll errors:" + strErrs)
 	}
 
 	// Print results
