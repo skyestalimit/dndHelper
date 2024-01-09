@@ -34,7 +34,7 @@ func main() {
 
 	// Captured args sent to be parsed into DiceRolls
 	rollArgs := os.Args[1:len(os.Args)]
-	diceRolls, argErrs := diceroller.ParseRollArgs(rollArgs)
+	diceRolls, argErrs := diceroller.ParseRollArgs(rollArgs...)
 
 	// Print out parsing errors
 	for i := range argErrs {
@@ -42,7 +42,7 @@ func main() {
 	}
 
 	// Roll!
-	rollsResult, diceErrs := diceroller.PerformRolls(diceRolls)
+	rollsResult, diceErrs := diceroller.PerformRolls(diceRolls...)
 	if len(diceErrs) > 0 {
 		for i := range diceErrs {
 			fmt.Println("Unexpected dice roll error:" + diceErrs[i].Error())
