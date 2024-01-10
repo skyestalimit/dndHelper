@@ -54,9 +54,6 @@ func main() {
 		fmt.Println(rollsResult[i].String())
 	}
 	fmt.Println("Rolls sum:", diceroller.DiceRollResultsSum(rollsResult))
-
-	result, _ := diceroller.NewDiceRoll(2, 6, 4).PerformRollAndSum()
-	fmt.Println("One more: ", result)
 }
 
 func printUsage() {
