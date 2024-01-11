@@ -25,14 +25,14 @@ import (
 )
 
 func main() {
-	// Validate args have been captured
+	// Validate rollArgs have been captured
 	if len(os.Args) < 2 {
 		fmt.Println("Too few arguments: ", len(os.Args)-1)
 		printUsage()
 		return
 	}
 
-	// Captured args sent to be parsed into DiceRolls
+	// Captured rollArgs
 	rollArgs := os.Args[1:len(os.Args)]
 
 	// Roll!
