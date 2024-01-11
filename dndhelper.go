@@ -34,30 +34,25 @@ func main() {
 
 	// Captured args sent to be parsed into DiceRolls
 	rollArgs := os.Args[1:len(os.Args)]
-	diceRolls, argErrs := diceroller.ParseRollArgs(rollArgs...)
-
-	// Print out parsing errors
-	for i := range argErrs {
-		fmt.Println(argErrs[i])
-	}
 
 	// Roll!
-	rollsResult, diceErrs := diceroller.PerformRolls(diceRolls...)
-	if len(diceErrs) > 0 {
-		for i := range diceErrs {
-			fmt.Println("Unexpected dice roll error:" + diceErrs[i].Error())
-		}
+	results, errs := diceroller.PerformRollArgs(rollArgs...)
+
+	// Print out parsing errors
+	for i := range errs {
+		fmt.Println(errs[i])
 	}
 
 	// Print results
-	for i := range rollsResult {
-		fmt.Println(rollsResult[i].String())
+	for i := range results {
+		fmt.Println(results[i].String())
 	}
-	fmt.Println("Rolls sum:", diceroller.DiceRollResultsSum(rollsResult))
+
+	// Print total sum
+	fmt.Println("Rolls sum:", diceroller.DiceRollResultsSum(results))
 }
 
 func printUsage() {
 	fmt.Println("Usage:	dndhelper [rollArg] ... [rollArg]")
 	fmt.Println("	Valid rollArg examples: 1d6, 4d4, 1d10+1, 1D8-1")
-	fmt.Println("	Returns the sum of all DiceRolls")
 }
