@@ -49,7 +49,7 @@ func main() {
 	}
 
 	// Print total sum
-	fmt.Println("Rolls sum:", diceroller.DiceRollResultsSum(results...))
+	fmt.Println("Total sum:", diceroller.RollingExpressionResultSum(results...))
 }
 
 func printUsage() {
