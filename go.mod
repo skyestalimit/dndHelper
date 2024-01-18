@@ -1,6 +1,6 @@
 module github.com/skyestalimit/dndhelper
 
-go 1.21.5
+go 1.21
 
 toolchain go1.21.6
 
