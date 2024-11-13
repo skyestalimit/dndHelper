@@ -28,7 +28,7 @@ rollAttribute string list:
   - drophigh: Drop High, drops the highest result of a DiceRoll
   - droplow: Drop Low, drops the lowest result of a DiceRoll
 
-Example:
+Examples:
 
 	dndhelper hit advantage 1d20+5 dmg 2d6+4 1d4
 	dndhelper roll 2d10 roll 6d6 roll 1d100
