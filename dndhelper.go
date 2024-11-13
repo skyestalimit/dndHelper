@@ -9,11 +9,31 @@ Usage:
 
 	dndhelper [rollArg] ... [rollArg]
 
-A rollArg must be in the format XdY(-|+Z). You can send as many rollArg as you want.
+A rollArg is in the format XdY(-|+Z). You can send as many rollArg as you want,
+they will build into a rolling expression. Invalid formats will be ignored.
 
-Examples of valid roll args:
+Example:
 
-	1d6, 4d4, 1d10+1, 1D8-1
+	dndhelper 1d6 4d4 1d10+1 1D8-1
+
+A rollArg can also be a rollattribute, to build more complex rolling expressions.
+
+rollAttribute string list:
+  - roll, hit, dmg : separators, starts a new rolling expressions
+  - crit: Critical, doubles all dice ammount
+  - spell: Spell, DiceRollResults.String() prints the sum and the sum halved for saves
+  - half: Halves the sums, for resistances and such
+  - adv: Advantage, rolls each dice twice and drops the lowest
+  - dis: Disadvantage, rolls each dice twice and drops the highest
+  - drophigh: Drop High, drops the highest result of a DiceRoll
+  - droplow: Drop Low, drops the lowest result of a DiceRoll
+
+Example:
+
+	dndhelper hit advantage 1d20+5 dmg 2d6+4 1d4
+	dndhelper roll 2d10 roll 6d6 roll 1d100
+	dndhelper spell 6d8
+	dndhelper droplow 4d6
 */
 package main
 
