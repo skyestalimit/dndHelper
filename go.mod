@@ -19,5 +19,3 @@ retract v0.1.0-beta.1
 require github.com/skyestalimit/diceroller v1.1.2
 
 require golang.org/x/exp v0.0.0-20241108190413-2d47ceb2692f // indirect
-
-replace github.com/skyestalimit/diceroller => ../diceroller
